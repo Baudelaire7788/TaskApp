@@ -56,6 +56,17 @@ class _HomeState extends State<Home> {
         await googleSignIn.signOut();
       }
 
+
+      // final GitHubSignIn gitHubSignIn = GitHubSignIn(
+      //   clientId: 'YOUR_GITHUB_CLIENT_ID',
+      //   clientSecret: 'YOUR_GITHUB_CLIENT_SECRET',
+      //   redirectUrl: 'YOUR_GITHUB_REDIRECT_URL',
+      // );
+      //
+      // if (await gitHubSignIn.isSignedIn) {
+      //   await gitHubSignIn.signOut();
+      // }
+
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => Login()),
       );

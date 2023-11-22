@@ -20,7 +20,7 @@ class _LoginState extends State<Login> {
   final FirebaseAuthService _auth = FirebaseAuthService();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -28,8 +28,8 @@ class _LoginState extends State<Login> {
     emailController.dispose();
     passwordController.dispose();
   }
-  
-  void signIn() async{
+
+  void signIn() async {
     String email = emailController.text;
     String password = passwordController.text;
 
@@ -50,9 +50,9 @@ class _LoginState extends State<Login> {
 
     try {
       final GoogleSignInAccount? googleSignInAccount =
-      await _googleSignIn.signIn();
+          await _googleSignIn.signIn();
       final GoogleSignInAuthentication googleSignInAuthentication =
-      await googleSignInAccount!.authentication;
+          await googleSignInAccount!.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
@@ -60,7 +60,7 @@ class _LoginState extends State<Login> {
       );
 
       final UserCredential authResult =
-      await _auth.signInWithCredential(credential);
+          await _auth.signInWithCredential(credential);
       final User? user = authResult.user;
 
       if (user != null) {
@@ -74,7 +74,12 @@ class _LoginState extends State<Login> {
       print('Erreur lors de la connexion avec Google: $e');
     }
   }
-  
+
+  Future<UserCredential> signInWithGithub() async {
+    GithubAuthProvider githubAuthProvider = GithubAuthProvider();
+    return await FirebaseAuth.instance.signInWithProvider(githubAuthProvider);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,69 +129,69 @@ class _LoginState extends State<Login> {
                   children: [
                     Expanded(
                       child: Form(
-                        key: _formKey,
+                          key: _formKey,
                           child: Column(
-                        children: [
-                          Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            elevation: 2,
-                            child: TextFormField(
-                              controller: emailController,
-                              decoration: InputDecoration(
-                                hintText: 'Email',
-                                hintStyle: TextStyle(fontSize: 13),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide.none),
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "Le champ ne doit pas être vide";
-                                }
-                                return null;
-                              },
-                            ),
-                            shadowColor: Colors.black26,
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            elevation: 2,
-                            child: TextFormField(
-                              controller: passwordController,
-                              obscureText: _obscureText,
-                              decoration: InputDecoration(
-                                suffixIcon: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      _obscureText = !_obscureText;
-                                    });
+                            children: [
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                                elevation: 2,
+                                child: TextFormField(
+                                  controller: emailController,
+                                  decoration: InputDecoration(
+                                    hintText: 'Email',
+                                    hintStyle: TextStyle(fontSize: 13),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide.none),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Le champ ne doit pas être vide";
+                                    }
+                                    return null;
                                   },
-                                  child: Icon(_obscureText
-                                      ? Icons.visibility
-                                      : Icons.visibility_off),
                                 ),
-                                hintText: 'Password',
-                                hintStyle: TextStyle(fontSize: 13),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide.none),
+                                shadowColor: Colors.black26,
                               ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "Le champ ne doit pas être vide";
-                                }
-                                return null;
-                              },
-                            ),
-                            shadowColor: Colors.black26,
-                          ),
-                        ],
-                      )),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                                elevation: 2,
+                                child: TextFormField(
+                                  controller: passwordController,
+                                  obscureText: _obscureText,
+                                  decoration: InputDecoration(
+                                    suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _obscureText = !_obscureText;
+                                        });
+                                      },
+                                      child: Icon(_obscureText
+                                          ? Icons.visibility
+                                          : Icons.visibility_off),
+                                    ),
+                                    hintText: 'Password',
+                                    hintStyle: TextStyle(fontSize: 13),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide.none),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Le champ ne doit pas être vide";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                shadowColor: Colors.black26,
+                              ),
+                            ],
+                          )),
                     )
                   ],
                 ),
@@ -206,7 +211,7 @@ class _LoginState extends State<Login> {
                         borderRadius: BorderRadius.circular(10)),
                   ),
                   onPressed: () {
-                    if(_formKey.currentState!.validate()){
+                    if (_formKey.currentState!.validate()) {
                       signIn();
                     }
                   },
@@ -238,7 +243,7 @@ class _LoginState extends State<Login> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           InkWell(
-                            onTap: (){
+                            onTap: () {
                               googleSignIn();
                             },
                             child: Card(
@@ -257,38 +262,36 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           SizedBox(
-                            height: 15,
+                            height: 25,
                           ),
-                          Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            elevation: 2,
-                            child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 28),
-                                child: Image.asset(
-                                  "assets/images/facebook.png",
-                                  width: 30,
-                                  height: 30,
-                                )),
-                            shadowColor: Colors.black26,
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            elevation: 2,
-                            child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 28),
-                                child: Image.asset(
-                                  "assets/images/github.png",
-                                  width: 30,
-                                  height: 30,
-                                )),
-                            shadowColor: Colors.black26,
+                          InkWell(
+                            onTap: () async {
+                              try {
+                                UserCredential userCredential =
+                                    await signInWithGithub();
+                                if (context.mounted) {
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) => Home()));
+                                }
+                              } catch (e) {
+                                print("Erreur lors de la connexion github");
+                              }
+                            },
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              elevation: 2,
+                              child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 28),
+                                  child: Image.asset(
+                                    "assets/images/github.png",
+                                    width: 30,
+                                    height: 30,
+                                  )),
+                              shadowColor: Colors.black26,
+                            ),
                           ),
                         ],
                       )),

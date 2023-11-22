@@ -348,24 +348,7 @@ class _RegisterState extends State<Register> {
                                 ),
                               ),
                               SizedBox(
-                                height: 15,
-                              ),
-                              Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                elevation: 2,
-                                child: Container(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 28),
-                                    child: Image.asset(
-                                      "assets/images/facebook.png",
-                                      width: 30,
-                                      height: 30,
-                                    )),
-                                shadowColor: Colors.black26,
-                              ),
-                              SizedBox(
-                                height: 15,
+                                height: 25,
                               ),
                               Card(
                                 shape: RoundedRectangleBorder(
