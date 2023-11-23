@@ -56,7 +56,6 @@ class _HomeState extends State<Home> {
         await googleSignIn.signOut();
       }
 
-
       // final GitHubSignIn gitHubSignIn = GitHubSignIn(
       //   clientId: 'YOUR_GITHUB_CLIENT_ID',
       //   clientSecret: 'YOUR_GITHUB_CLIENT_SECRET',
@@ -79,38 +78,98 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            ListTile(
+              title: TextButton(
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.person,
+                      color: Colors.black26,
+                      size: 24,
+                    ),
+                    Text("Home")
+                  ],
+                ),
+                onPressed: () {},
+              ),
+            ),
+            ListTile(
+              title: TextButton(
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.person,
+                      color: Colors.black26,
+                      size: 24,
+                    ),
+                    Text("Home")
+                  ],
+                ),
+                onPressed: () {},
+              ),
+            ),
+            ListTile(
+              title: TextButton(
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.person,
+                      color: Colors.black26,
+                      size: 24,
+                    ),
+                    Text("Home")
+                  ],
+                ),
+                onPressed: () {},
+              ),
+            ),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(24),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Image.asset(
-                    "assets/images/menus.png",
-                    height: 25,
-                    width: 25,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      deconnexion();
-                    },
-                    child: Row(
-                      children: [
-                        Text(
-                          "Déconnexion ",
-                          style: TextStyle(color: Colors.red, fontSize: 15),
+              child: Builder(
+                builder: (context) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Scaffold.of(context).openDrawer();
+                        },
+                        child: Image.asset(
+                          "assets/images/menus.png",
+                          height: 25,
+                          width: 25,
                         ),
-                        Icon(
-                          Icons.logout,
-                          size: 15,
-                          color: Colors.red,
-                        )
-                      ],
-                    ),
-                  ),
-                ],
+                      ),
+                      InkWell(
+                        onTap: () {
+                          deconnexion();
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              "Déconnexion ",
+                              style: TextStyle(color: Colors.red, fontSize: 15),
+                            ),
+                            Icon(
+                              Icons.logout,
+                              size: 15,
+                              color: Colors.red,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                }
               ),
             ),
             Padding(
