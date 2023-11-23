@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:taskapp/pages/login.dart';
@@ -43,6 +42,7 @@ class _HomeState extends State<Home> {
         type: "assets/images/settings.png",
         pregress: "0"),
   ];
+  final primaryColor = Color(0xFF3D6FE3);
 
   void deconnexion() async {
     try {
@@ -74,6 +74,16 @@ class _HomeState extends State<Home> {
     }
   }
 
+  Future<String?> _getCurrentUserEmail() async {
+    User? user = _auth.currentUser;
+
+    if (user != null) {
+      return user.email;
+    } else {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,50 +91,109 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: ListView(
           children: [
-            ListTile(
-              title: TextButton(
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.person,
-                      color: Colors.black26,
-                      size: 24,
-                    ),
-                    Text("Home")
-                  ],
-                ),
-                onPressed: () {},
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/drawer.jpg"),
+                      fit: BoxFit.cover,
+                      opacity: 150),
+                  color: Colors.black),
+              accountName: Text("Baudelaire Gboyou"),
+              accountEmail: FutureBuilder(
+                future: _getCurrentUserEmail(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    return Text('Erreur: ${snapshot.error}');
+                  } else {
+                    return Text(
+                      snapshot.data ?? 'Aucun utilisateur connecté',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    );
+                  }
+                },
               ),
+              currentAccountPicture: ClipRRect(
+                  borderRadius: BorderRadius.circular(200),
+                  child: Image.asset(
+                    "assets/images/avatar.png",
+                  )),
             ),
             ListTile(
-              title: TextButton(
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.person,
-                      color: Colors.black26,
-                      size: 24,
-                    ),
-                    Text("Home")
-                  ],
-                ),
-                onPressed: () {},
+              leading: Image.asset("assets/images/star.png",height: 20,),
+              title: Text(
+                "Today",
+                style: TextStyle(fontSize: 15),
               ),
+              selectedColor: Color(primaryColor.value),
             ),
             ListTile(
-              title: TextButton(
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.person,
-                      color: Colors.black26,
-                      size: 24,
-                    ),
-                    Text("Home")
-                  ],
-                ),
-                onPressed: () {},
+              leading: Image.asset("assets/images/calendar.png",height: 20,),
+              title: Text(
+                "Upcomming",
+                style: TextStyle(fontSize: 15),
               ),
+              selectedColor: Color(primaryColor.value),
+            ),
+            ListTile(
+              leading: Image.asset("assets/images/coming.png",height: 20,),
+              title: Text(
+                "Anytime",
+                style: TextStyle(fontSize: 15),
+              ),
+              selectedColor: Color(primaryColor.value),
+            ),
+            ListTile(
+              leading: Image.asset("assets/images/inbox.png",height: 20,),
+              title: Text(
+                "Someday",
+                style: TextStyle(fontSize: 15),
+              ),
+              selectedColor: Color(primaryColor.value),
+            ),
+            ListTile(
+              leading: Image.asset("assets/images/delete.png",height: 20,),
+              title: Text(
+                "Trash",
+                style: TextStyle(fontSize: 15),
+              ),
+              selectedColor: Color(primaryColor.value),
+            ),
+            Divider(),
+            ListTile(
+              leading: Image.asset("assets/images/cogwheel.png",height: 20,),
+              title: Text(
+                "Settings",
+                style: TextStyle(fontSize: 15),
+              ),
+              selectedColor: Color(primaryColor.value),
+            ),
+            ListTile(
+              leading: Image.asset("assets/images/user.png",height: 20,),
+              title: Text(
+                "Profil",
+                style: TextStyle(fontSize: 15),
+              ),
+              selectedColor: Color(primaryColor.value),
+            ),
+            SizedBox(
+              height: 80,
+            ),
+            ListTile(
+              leading: Image.asset("assets/images/logout.png",height: 20,),
+              title: Text(
+                "Sign out",
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red),
+              ),
+              selectedColor: Color(primaryColor.value),
+              onTap: () {
+                deconnexion();
+              },
             ),
           ],
         ),
@@ -134,43 +203,23 @@ class _HomeState extends State<Home> {
           children: [
             Padding(
               padding: const EdgeInsets.all(24),
-              child: Builder(
-                builder: (context) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Scaffold.of(context).openDrawer();
-                        },
-                        child: Image.asset(
-                          "assets/images/menus.png",
-                          height: 25,
-                          width: 25,
-                        ),
+              child: Builder(builder: (context) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                      child: Image.asset(
+                        "assets/images/menus.png",
+                        height: 25,
+                        width: 25,
                       ),
-                      InkWell(
-                        onTap: () {
-                          deconnexion();
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              "Déconnexion ",
-                              style: TextStyle(color: Colors.red, fontSize: 15),
-                            ),
-                            Icon(
-                              Icons.logout,
-                              size: 15,
-                              color: Colors.red,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  );
-                }
-              ),
+                    ),
+                  ],
+                );
+              }),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),

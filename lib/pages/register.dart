@@ -14,7 +14,8 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  bool _obscureText = true;
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -178,7 +179,7 @@ class _RegisterState extends State<Register> {
                                     elevation: 2,
                                     child: TextFormField(
                                       controller: passwordController,
-                                      obscureText: _obscureText,
+                                      obscureText: _obscurePassword,
                                       decoration: InputDecoration(
                                           hintText: 'Password',
                                           hintStyle: TextStyle(fontSize: 13),
@@ -189,10 +190,10 @@ class _RegisterState extends State<Register> {
                                           suffixIcon: GestureDetector(
                                             onTap: () {
                                               setState(() {
-                                                _obscureText = !_obscureText;
+                                                _obscurePassword = !_obscurePassword;
                                               });
                                             },
-                                            child: Icon(_obscureText
+                                            child: Icon(_obscurePassword
                                                 ? Icons.visibility
                                                 : Icons.visibility_off),
                                           )),
@@ -214,16 +215,16 @@ class _RegisterState extends State<Register> {
                                             BorderRadius.circular(10)),
                                     elevation: 2,
                                     child: TextFormField(
-                                      obscureText: _obscureText,
+                                      obscureText: _obscureConfirmPassword,
                                       controller: confirmPasswordController,
                                       decoration: InputDecoration(
                                         suffixIcon: GestureDetector(
                                           onTap: () {
                                             setState(() {
-                                              _obscureText = !_obscureText;
+                                              _obscureConfirmPassword = !_obscureConfirmPassword;
                                             });
                                           },
-                                          child: Icon(_obscureText
+                                          child: Icon(_obscureConfirmPassword
                                               ? Icons.visibility
                                               : Icons.visibility_off),
                                         ),
