@@ -201,28 +201,35 @@ class _LoginState extends State<Login> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 40),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 2,
-                    shadowColor: Color(0x953D6FE3),
-                    primary: Colors.green,
-                    backgroundColor: Color(0xFF3D6FE3),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                  ),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      signIn();
-                    }
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 17, horizontal: 99),
-                    child: Text(
-                      'Sign In',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation: 2,
+                          shadowColor: Color(0x953D6FE3),
+                          primary: Colors.green,
+                          backgroundColor: Color(0xFF3D6FE3),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            signIn();
+                          }
+                        },
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 17, horizontal: 99),
+                          child: Text(
+                            'Sign In',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
               SizedBox(

@@ -255,61 +255,67 @@ class _RegisterState extends State<Register> {
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        elevation: 2,
-                        shadowColor: Color(0x953D6FE3),
-                        backgroundColor: Color(0xFF3D6FE3),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          final password = passwordController.text;
-                          final confirm = confirmPasswordController.text;
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              elevation: 2,
+                              shadowColor: Color(0x953D6FE3),
+                              backgroundColor: Color(0xFF3D6FE3),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                final password = passwordController.text;
+                                final confirm = confirmPasswordController.text;
 
-                          if (password == confirm) {
-                            signUp();
-                          } else {
-                            ScaffoldMessenger.of(context)
-                                .showMaterialBanner(MaterialBanner(
-                              leading: Icon(
-                                Icons.error_rounded,
-                                color: Colors.white,
-                                size: 32,
+                                if (password == confirm) {
+                                  signUp();
+                                } else {
+                                  ScaffoldMessenger.of(context)
+                                      .showMaterialBanner(MaterialBanner(
+                                    leading: Icon(
+                                      Icons.error_rounded,
+                                      color: Colors.white,
+                                      size: 32,
+                                    ),
+                                    backgroundColor: Colors.red,
+                                    content: Text(
+                                      "Vous devez renseigner le même mot de passe",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => ScaffoldMessenger.of(context)
+                                            .hideCurrentMaterialBanner(),
+                                        child: Text(
+                                          "OK",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        style: TextButton.styleFrom(
+                                            primary: Colors.white),
+                                      )
+                                    ],
+                                  ));
+                                }
+                              }
+                            },
+                            child: Container(
+                              padding:
+                                  EdgeInsets.symmetric(vertical: 17, horizontal: 95),
+                              child: Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.w600),
                               ),
-                              backgroundColor: Colors.red,
-                              content: Text(
-                                "Vous devez renseigner le même mot de passe",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => ScaffoldMessenger.of(context)
-                                      .hideCurrentMaterialBanner(),
-                                  child: Text(
-                                    "OK",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  style: TextButton.styleFrom(
-                                      primary: Colors.white),
-                                )
-                              ],
-                            ));
-                          }
-                        }
-                      },
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 17, horizontal: 95),
-                        child: Text(
-                          'Sign Up',
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w600),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                   SizedBox(

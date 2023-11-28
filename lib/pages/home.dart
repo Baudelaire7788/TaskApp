@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:taskapp/pages/login.dart';
+import 'package:taskapp/pages/profil.dart';
 import 'package:taskapp/pages/task.dart';
 import 'package:taskapp/pages/taskcard.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -92,13 +93,14 @@ class _HomeState extends State<Home> {
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/drawer.jpg"),
-                      fit: BoxFit.cover,
-                      opacity: 150),
-                  color: Colors.black),
-              accountName: Text("Baudelaire Gboyou"),
+              decoration: BoxDecoration(color: Colors.white),
+              accountName: Text(
+                "Baudelaire Gboyou",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF3D6FE3)),
+              ),
               accountEmail: FutureBuilder(
                 future: _getCurrentUserEmail(),
                 builder: (context, snapshot) {
@@ -109,8 +111,10 @@ class _HomeState extends State<Home> {
                   } else {
                     return Text(
                       snapshot.data ?? 'Aucun utilisateur connecté',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.grey.shade700),
                     );
                   }
                 },
@@ -122,7 +126,10 @@ class _HomeState extends State<Home> {
                   )),
             ),
             ListTile(
-              leading: Image.asset("assets/images/star.png",height: 20,),
+              leading: Image.asset(
+                "assets/images/star.png",
+                height: 20,
+              ),
               title: Text(
                 "Today",
                 style: TextStyle(fontSize: 15),
@@ -130,7 +137,10 @@ class _HomeState extends State<Home> {
               selectedColor: Color(primaryColor.value),
             ),
             ListTile(
-              leading: Image.asset("assets/images/calendar.png",height: 20,),
+              leading: Image.asset(
+                "assets/images/calendar.png",
+                height: 20,
+              ),
               title: Text(
                 "Upcomming",
                 style: TextStyle(fontSize: 15),
@@ -138,7 +148,10 @@ class _HomeState extends State<Home> {
               selectedColor: Color(primaryColor.value),
             ),
             ListTile(
-              leading: Image.asset("assets/images/coming.png",height: 20,),
+              leading: Image.asset(
+                "assets/images/coming.png",
+                height: 20,
+              ),
               title: Text(
                 "Anytime",
                 style: TextStyle(fontSize: 15),
@@ -146,7 +159,10 @@ class _HomeState extends State<Home> {
               selectedColor: Color(primaryColor.value),
             ),
             ListTile(
-              leading: Image.asset("assets/images/inbox.png",height: 20,),
+              leading: Image.asset(
+                "assets/images/inbox.png",
+                height: 20,
+              ),
               title: Text(
                 "Someday",
                 style: TextStyle(fontSize: 15),
@@ -154,7 +170,10 @@ class _HomeState extends State<Home> {
               selectedColor: Color(primaryColor.value),
             ),
             ListTile(
-              leading: Image.asset("assets/images/delete.png",height: 20,),
+              leading: Image.asset(
+                "assets/images/delete.png",
+                height: 20,
+              ),
               title: Text(
                 "Trash",
                 style: TextStyle(fontSize: 15),
@@ -163,7 +182,10 @@ class _HomeState extends State<Home> {
             ),
             Divider(),
             ListTile(
-              leading: Image.asset("assets/images/cogwheel.png",height: 20,),
+              leading: Image.asset(
+                "assets/images/cogwheel.png",
+                height: 20,
+              ),
               title: Text(
                 "Settings",
                 style: TextStyle(fontSize: 15),
@@ -171,18 +193,28 @@ class _HomeState extends State<Home> {
               selectedColor: Color(primaryColor.value),
             ),
             ListTile(
-              leading: Image.asset("assets/images/user.png",height: 20,),
+              leading: Image.asset(
+                "assets/images/user.png",
+                height: 20,
+              ),
               title: Text(
                 "Profil",
                 style: TextStyle(fontSize: 15),
               ),
               selectedColor: Color(primaryColor.value),
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => Profil()));
+              },
             ),
             SizedBox(
               height: 80,
             ),
             ListTile(
-              leading: Image.asset("assets/images/logout.png",height: 20,),
+              leading: Image.asset(
+                "assets/images/logout.png",
+                height: 20,
+              ),
               title: Text(
                 "Sign out",
                 style: TextStyle(
