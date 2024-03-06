@@ -208,7 +208,7 @@ class _HomeState extends State<Home> {
               },
             ),
             SizedBox(
-              height: 80,
+              height: 35,
             ),
             ListTile(
               leading: Image.asset(

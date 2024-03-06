@@ -108,7 +108,7 @@ class _OnboardingState extends State<Onboarding> {
               style: TextButton.styleFrom(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(0)),
-                  primary: Color(0xFF3d6fe3),
+                  foregroundColor: Color(0xFF3d6fe3),
                   backgroundColor: Colors.white,
                   minimumSize: Size.fromHeight(80)),
               onPressed: () async {

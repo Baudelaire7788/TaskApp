@@ -88,247 +88,249 @@ class _LoginState extends State<Login> {
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 60,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/images/splash.png",
-                    height: 100,
-                    width: 100,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 40),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 60,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "Login to your Account",
-                      style: TextStyle(fontSize: 18),
-                      textAlign: TextAlign.start,
+                    Image.asset(
+                      "assets/images/splash.png",
+                      height: 100,
+                      width: 100,
                     ),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 35),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Form(
-                          key: _formKey,
-                          child: Column(
-                            children: [
-                              Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                elevation: 2,
-                                child: TextFormField(
-                                  controller: emailController,
-                                  decoration: InputDecoration(
-                                    hintText: 'Email',
-                                    hintStyle: TextStyle(fontSize: 13),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide.none),
-                                  ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Le champ ne doit pas être vide";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                shadowColor: Colors.black26,
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                elevation: 2,
-                                child: TextFormField(
-                                  controller: passwordController,
-                                  obscureText: _obscureText,
-                                  decoration: InputDecoration(
-                                    suffixIcon: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          _obscureText = !_obscureText;
-                                        });
-                                      },
-                                      child: Icon(_obscureText
-                                          ? Icons.visibility
-                                          : Icons.visibility_off),
-                                    ),
-                                    hintText: 'Password',
-                                    hintStyle: TextStyle(fontSize: 13),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide.none),
-                                  ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Le champ ne doit pas être vide";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                shadowColor: Colors.black26,
-                              ),
-                            ],
-                          )),
-                    )
-                  ],
+                SizedBox(
+                  height: 40,
                 ),
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 40),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          elevation: 2,
-                          shadowColor: Color(0x953D6FE3),
-                          primary: Colors.green,
-                          backgroundColor: Color(0xFF3D6FE3),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            signIn();
-                          }
-                        },
-                        child: Container(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 17, horizontal: 99),
-                          child: Text(
-                            'Sign In',
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.w600),
+                Padding(
+                  padding: const EdgeInsets.only(left: 40),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Login to your Account",
+                        style: TextStyle(fontSize: 18),
+                        textAlign: TextAlign.start,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 35),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Form(
+                            key: _formKey,
+                            child: Column(
+                              children: [
+                                Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  elevation: 2,
+                                  child: TextFormField(
+                                    controller: emailController,
+                                    decoration: InputDecoration(
+                                      hintText: 'Email',
+                                      hintStyle: TextStyle(fontSize: 13),
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide: BorderSide.none),
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return "Le champ ne doit pas être vide";
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  shadowColor: Colors.black26,
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  elevation: 2,
+                                  child: TextFormField(
+                                    controller: passwordController,
+                                    obscureText: _obscureText,
+                                    decoration: InputDecoration(
+                                      suffixIcon: GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            _obscureText = !_obscureText;
+                                          });
+                                        },
+                                        child: Icon(_obscureText
+                                            ? Icons.visibility
+                                            : Icons.visibility_off),
+                                      ),
+                                      hintText: 'Password',
+                                      hintStyle: TextStyle(fontSize: 13),
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide: BorderSide.none),
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return "Le champ ne doit pas être vide";
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  shadowColor: Colors.black26,
+                                ),
+                              ],
+                            )),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            elevation: 2,
+                            shadowColor: Color(0x953D6FE3),
+                            foregroundColor: Colors.green,
+                            backgroundColor: Color(0xFF3D6FE3),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              signIn();
+                            }
+                          },
+                          child: Container(
+                            padding:
+                                EdgeInsets.symmetric(vertical: 17, horizontal: 99),
+                            child: Text(
+                              'Sign In',
+                              style: TextStyle(color: Colors.white,
+                                  fontSize: 10, fontWeight: FontWeight.w600),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              Text(
-                "- Or sign in with -",
-                style: TextStyle(color: Colors.black26, fontSize: 13),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 35),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Form(
-                          child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              googleSignIn();
-                            },
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              elevation: 2,
-                              child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 28),
-                                  child: Image.asset(
-                                    "assets/images/google.png",
-                                    width: 30,
-                                    height: 30,
-                                  )),
-                              shadowColor: Colors.black26,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                          InkWell(
-                            onTap: () async {
-                              try {
-                                UserCredential userCredential =
-                                    await signInWithGithub();
-                                if (context.mounted) {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) => Home()));
-                                }
-                              } catch (e) {
-                                print("Erreur lors de la connexion github");
-                              }
-                            },
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              elevation: 2,
-                              child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 28),
-                                  child: Image.asset(
-                                    "assets/images/github.png",
-                                    width: 30,
-                                    height: 30,
-                                  )),
-                              shadowColor: Colors.black26,
-                            ),
-                          ),
-                        ],
-                      )),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 60,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Don't have an acount?",
-                      style: TextStyle(color: Colors.black26)),
-                  InkWell(
-                    child: Text(
-                      " Sign Up",
-                      style: TextStyle(
-                          color: Color(0xFF3D6FE3),
-                          fontWeight: FontWeight.w600),
-                    ),
-                    onTap: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => Register()));
-                    },
+                    ],
                   ),
-                ],
-              )
-            ],
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                Text(
+                  "- Or sign in with -",
+                  style: TextStyle(color: Colors.black26, fontSize: 13),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 35),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Form(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                googleSignIn();
+                              },
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                                elevation: 2,
+                                child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 28),
+                                    child: Image.asset(
+                                      "assets/images/google.png",
+                                      width: 30,
+                                      height: 30,
+                                    )),
+                                shadowColor: Colors.black26,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                try {
+                                  UserCredential userCredential =
+                                      await signInWithGithub();
+                                  if (context.mounted) {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) => Home()));
+                                  }
+                                } catch (e) {
+                                  print("Erreur lors de la connexion github");
+                                }
+                              },
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                                elevation: 2,
+                                child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 28),
+                                    child: Image.asset(
+                                      "assets/images/github.png",
+                                      width: 30,
+                                      height: 30,
+                                    )),
+                                shadowColor: Colors.black26,
+                              ),
+                            ),
+                          ],
+                        )),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Don't have an acount?",
+                        style: TextStyle(color: Colors.black26)),
+                    InkWell(
+                      child: Text(
+                        " Sign Up",
+                        style: TextStyle(
+                            color: Color(0xFF3D6FE3),
+                            fontWeight: FontWeight.w600),
+                      ),
+                      onTap: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => Register()));
+                      },
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

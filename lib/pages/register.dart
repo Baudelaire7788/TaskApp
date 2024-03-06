@@ -103,9 +103,6 @@ class _RegisterState extends State<Register> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -297,7 +294,7 @@ class _RegisterState extends State<Register> {
                                               fontWeight: FontWeight.w600),
                                         ),
                                         style: TextButton.styleFrom(
-                                            primary: Colors.white),
+                                            backgroundColor: Colors.white),
                                       )
                                     ],
                                   ));
@@ -309,8 +306,8 @@ class _RegisterState extends State<Register> {
                                   EdgeInsets.symmetric(vertical: 17, horizontal: 95),
                               child: Text(
                                 'Sign Up',
-                                style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.w600),
+                                style: TextStyle(color: Colors.white,
+                                    fontSize: 10, fontWeight: FontWeight.w600),
                               ),
                             ),
                           ),
@@ -319,7 +316,7 @@ class _RegisterState extends State<Register> {
                     ),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 40,
                   ),
                   Text(
                     "- Or sign in with -",
