@@ -316,11 +316,6 @@ class _ProfilState extends State<Profil> {
                                   final userFirstName = firstNameController.text;
                                   final userTel = telController.text;
 
-                                  final path = 'files/${pickedFile!.name}';
-                                  final file = File(pickedFile!.path!);
-                                  final ref = FirebaseStorage.instance.ref().child(path);
-                                  await ref.putFile(file);
-
                                   CollectionReference profilRef = FirebaseFirestore.instance.collection("profil");
 
                                   // Utiliser l'ID de l'utilisateur comme identifiant du document
@@ -330,6 +325,13 @@ class _ProfilState extends State<Profil> {
                                   final existingDoc = await profilRef.doc(userId).get();
 
                                   if (existingDoc.exists) {
+
+                                    final path = 'files/${pickedFile!.name}';
+                                    final file = File(pickedFile!.path!);
+                                    final ref = FirebaseStorage.instance.ref().child(path);
+                                    await ref.putFile(file);
+
+
                                     // Mettre à jour les informations si le document existe
                                     await profilRef.doc(userId).update({
                                       'datenaissance': selectedDateTime,
@@ -337,8 +339,14 @@ class _ProfilState extends State<Profil> {
                                       'prenom': userFirstName,
                                       'sexe': selectedSex,
                                       'telephone': userTel,
+                                      'photoPath':path
                                     });
+
                                   } else {
+                                    final path = 'files/${pickedFile!.name}';
+                                    final file = File(pickedFile!.path!);
+                                    final ref = FirebaseStorage.instance.ref().child(path);
+                                    await ref.putFile(file);
                                     // Ajouter un nouveau document si le document n'existe pas
                                     await profilRef.doc(userId).set({
                                       'datenaissance': selectedDateTime,
@@ -346,6 +354,7 @@ class _ProfilState extends State<Profil> {
                                       'prenom': userFirstName,
                                       'sexe': selectedSex,
                                       'telephone': userTel,
+                                      'photoPath':path
                                     });
                                   }
 
